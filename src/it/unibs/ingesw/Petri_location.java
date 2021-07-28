@@ -22,4 +22,12 @@ public class Petri_location extends Location{
 		return this.token;
 	}
 	
+	public void reduceToken (int reduction) {
+		this.token = token - reduction;
+	}
+	
+	public void addToken (int addition) {
+		this.token = token + addition;
+	}
+	
 }

@@ -64,4 +64,8 @@ public class Petri_network implements NameGiver, JsonAble{
 		}
 		return s;
 	}
+	
+	public ArrayList<Petri_link> getLinks(){
+		return this.petriNetLinks;
+	}
 }
