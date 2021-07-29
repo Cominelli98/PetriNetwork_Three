@@ -1,5 +1,6 @@
 package it.unibs.ingesw;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public final class Menu_Petri {
@@ -10,9 +11,9 @@ public final class Menu_Petri {
 			"1:Crea una rete di Petri a partire da una rete esistente",
 			"2:Visualizza una rete di Petri",
 			"3:Salva una o più reti di Petri",
+			"4:Simula l'evoluzione di una rete di Petri da file",
 			"0:Indietro",
 			"___________________________",
-			
 	};
 	private final static String MESSAGGI_MENU[] = {
 			"da quale rete vuoi partire?",
@@ -49,6 +50,31 @@ public final class Menu_Petri {
 					Menu_Salva.pSaveOption(pn);
 				else 
 					System.out.println(NO_RETI_S);
+				break;
+			case 4:
+				ArrayList<String> s = new ArrayList<String>();
+				Simulatore daSimulare;
+				Petri_network rete;
+				int scelta;
+				int selezione;
+				try {
+				s = ReadN.readFile(Petri_network.class);
+				} catch (FileNotFoundException f) {
+					f.printStackTrace();
+				}
+				System.out.println("Scegli di quale rete di Petri vuoi simulare l'evoluzione");
+				System.out.println(ReadN.getNetNamesList(Petri_network.class));
+				scelta = Utility.readLimitedInt(0, s.size()-1);
+				rete = (Petri_network) ReadN.jsonToObject(s.get(scelta), Petri_network.class);
+				daSimulare = new Simulatore(rete);
+				System.out.println("STATO DI PARTENZA:");
+				Menu_Visua.printPetriNet(rete);
+				do {
+					System.out.println("MARCATURA SUCCESSIVA:");
+					daSimulare.nextStep();
+					System.out.println("Vuoi proseguire con la simulazione? \n 0)Esci \n 1)Prosegui");
+					selezione = Utility.readLimitedInt(0, 1);
+				}while(selezione!=0);
 				break;
 			}
 		}while (select!=0);
@@ -99,12 +125,12 @@ public final class Menu_Petri {
 	private static boolean petriSingleCheck(Petri_network pn, Petri_network toCheck) {
 		if (toCheck.getFatherNetId() == pn.getFatherNetId()){
 			for(int i=0; i<toCheck.getLocations().size(); i++) {
-				if(toCheck.getLocations().get(i).getToken() != pn.getLocations().get(i).getToken())
+				if(toCheck.getLocations().get(i).getValue() != pn.getLocations().get(i).getValue())
 					return false;
 			}
 			
 			for (int j=0; j<toCheck.getTransitions().size(); j++) {
-				if(toCheck.getTransitions().get(j).getCost() != pn.getTransitions().get(j).getCost())
+				if(toCheck.getTransitions().get(j).getValue() != pn.getTransitions().get(j).getValue())
 					return false;
 			}
 			return true;
@@ -137,4 +163,6 @@ public final class Menu_Petri {
 			pl.setToken(Utility.readLowLimitInt(0));
 		}
 	}
+	
+
 }

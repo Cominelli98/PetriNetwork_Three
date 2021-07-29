@@ -18,7 +18,7 @@ public class Simulatore {
 			stampAttivabili();
 			System.out.println("C'è un'unica transizione attivabile, prossimo step:");
 			modificaToken(transAttivabili().get(0));
-			Menu_visua.p
+			Menu_Visua.printPetriNet(rete);
 			}
 		
 		else {
@@ -27,13 +27,13 @@ public class Simulatore {
 			stampAttivabili();
 			int scelta = Utility.readLimitedInt(0, transAttivabili().size() -1);
 			modificaToken(transAttivabili().get(scelta));
-			
+			Menu_Visua.printPetriNet(rete);
 		}
 		//restituzione nuova marcatura
 	}
 	
 	
-	public void stampAttivabili() {
+	private void stampAttivabili() {
 		System.out.println("Lista transizioni attivabili:");
 		for (int i=0; i<transAttivabili().size(); i++) {
 			System.out.println(i + ") " + transAttivabili().get(i).getName());
@@ -50,12 +50,14 @@ public class Simulatore {
 		}
 		return risultato;
 	}
-	
+	//TODO: Va reso falso anche il caso in cui nessun link ha come destinazione la transizione
 	private boolean attivabile(Petri_transition pt) {
 		for (Petri_link l : rete.getLinks()) {
-			if (l.getDestination() == pt) {
-				if(((Petri_location) l.getOrigin()).getToken() < pt.getCost())
+			if (l.getDestination().getId() == pt.getId()) {
+				System.out.println("ciao");
+				if(((Petri_location) l.getOrigin()).getValue() < pt.getValue())
 					return false;
+			
 			}
 			
 		}
@@ -64,16 +66,16 @@ public class Simulatore {
 	
 	private void riduciToken(Petri_transition pt) {
 		for (Petri_link l : rete.getLinks()) {
-			if (l.getDestination() == pt) {
-				((Petri_location) l.getOrigin()).reduceToken(pt.getCost());
+			if (l.getDestination().getId() == pt.getId()) {
+				((Petri_location) l.getOrigin()).reduceToken(pt.getValue());
 			}
 		}
 	}
 		
 	private void aggiungiToken(Petri_transition pt) {
 		for (Petri_link l : rete.getLinks()) {
-			if (l.getOrigin() == pt) {
-				((Petri_location) l.getDestination()).addToken(1); //TO UNDERSTAND: QUANTO AUMENTANO I TOKEN DELLA DESTINAZIONE AAAAAAAAAAAAAAAAAAAAAAAAAAA
+			if (l.getOrigin().getId() == pt.getId()) {
+				((Petri_location) l.getDestination()).addToken(1); //TO UNDERSTAND: QUANTO AUMENTANO I TOKEN DELLA DESTINAZIONE 2AAAAAAAAAAAAAAAAAAAAAAAAAAA
 			}
 		}
 	}

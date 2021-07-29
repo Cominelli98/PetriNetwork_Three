@@ -1,11 +1,11 @@
 package it.unibs.ingesw;
 
-public class Petri_location extends Location{
+public class Petri_location extends Location implements ValueGiver{
 	
 	private int token;
 
 	public Petri_location(Location l, int petriNetId){
-		super(petriNetId, l.getNodeId(), l.getName());
+		super(petriNetId, l.getId(), l.getName());
 		this.token = 0;
 	}
 	
@@ -18,16 +18,16 @@ public class Petri_location extends Location{
 		this.token = token;
 	}
 	
-	public int getToken () {
-		return this.token;
+	public int getValue () {
+		return token;
 	}
 	
 	public void reduceToken (int reduction) {
-		this.token = token - reduction;
+		token = token - reduction;
 	}
 	
 	public void addToken (int addition) {
-		this.token = token + addition;
+		token = token + addition;
 	}
 	
 }

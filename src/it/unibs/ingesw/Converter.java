@@ -32,43 +32,32 @@ public final class Converter {
 	}
 	
 	
-	//vvvvvvv è un'atrocità ma ci lavoreremo vvvvvvv :(
-	
-	private static Node petriOrigin(ArrayList<Petri_location> pl, ArrayList<Petri_transition> pt, Link l) {
-		if (l.getOrigin().getClass()==Location.class) {
-			for (Location location : pl) {
-				if(location.getNodeId() == l.getOrigin().getNodeId())
-					return location;
-			}
+	public static Petri_link toPetri (ArrayList<Petri_location> pl, ArrayList<Petri_transition> pt, Link l, int petriNetId) {
+		Node tempOrigin = null;
+		Node tempDestination = null;
+		for (Location location : pl) {
+			if(location.getId() == l.getOrigin().getId())
+				tempOrigin = location;
 		}
-		else 
-			for(Transition transition : pt) {
-				if(transition.getNodeId() == l.getOrigin().getNodeId())
-					return transition;
-			}
-		return null;
-	}
-	
-	private static Node petriDestination(ArrayList<Petri_location> pl, ArrayList<Petri_transition> pt, Link l) {
-		if (l.getDestination().getClass()==Location.class) {
-			for (Location location : pl) {
-				if(location.getNodeId() == l.getDestination().getNodeId())
-					return location;
-			}
+		
+		for(Transition transition : pt) {
+			if(transition.getId() == l.getOrigin().getId())
+				tempOrigin = transition;
 		}
-		else 
-			for(Transition transition : pt) {
-				if(transition.getNodeId() == l.getDestination().getNodeId())
-					return transition;
-			}
-		return null;
+		
+		for (Location location : pl) {
+			if(location.getId() == l.getDestination().getId())
+				tempDestination = location;
+		}
+		
+		for(Transition transition : pt) {
+			if(transition.getId() == l.getDestination().getId())
+				tempDestination = transition;
+		}
+		return new Petri_link(tempOrigin, tempDestination, petriNetId);
 	}
 	
 	
-	
-	public static Petri_link toPetri (ArrayList<Petri_location> pl, ArrayList<Petri_transition> pt, Link link, int petriNetId) {
-		return new Petri_link(petriOrigin(pl,pt, link), petriDestination(pl,pt, link), petriNetId);
-	}
 	
 	public static ArrayList<Petri_link> toPetriLinks (ArrayList<Petri_location> pl, ArrayList<Petri_transition> pt, ArrayList<Link> l, int petriNetId){
 		ArrayList<Petri_link> temp = new ArrayList<>();

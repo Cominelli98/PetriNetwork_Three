@@ -16,6 +16,7 @@ public class Link {
 		return origin;
 	}
 
+
 	public void setOrigin(Node origin) {
 		this.origin = origin;
 	}

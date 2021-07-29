@@ -49,8 +49,8 @@ public final class ReadN {
 			ArrayList<String> nets = readFile(c);
 			Gson gson = new Gson();
 			for(String s : nets) {
-				JsonAble net = (JsonAble) gson.fromJson(s, c);
-				IDs.add(net.getNetId());
+				IDNameGiver net = (IDNameGiver) gson.fromJson(s, c);
+				IDs.add(net.getId());
 			}
 		} catch (FileNotFoundException e) {
 			IDs.add(ID_INIZIALE);
@@ -72,8 +72,8 @@ public final class ReadN {
 			ArrayList<String> nets = readFile(c);
 			int i = 0;
 			for(String s : nets) {
-				JsonAble net = (JsonAble) jsonToObject(s,c);
-				names.append(i+")"+net.getName());
+				IDNameGiver net = (IDNameGiver) jsonToObject(s,c);
+				names.append(i+")"+net.getName()+"\n");
 				i++;
 			}
 		} catch (FileNotFoundException e) {
@@ -87,7 +87,7 @@ public final class ReadN {
 		ArrayList<String> nets = readFile(c);
 		ArrayList<String> names = new ArrayList<>();
 		for(String s : nets) {
-			JsonAble n = (JsonAble) jsonToObject(s, c);
+			IDNameGiver n = (IDNameGiver) jsonToObject(s, c);
 			names.add(n.getName());
 		}
 		return names;
@@ -95,10 +95,12 @@ public final class ReadN {
 	
 	public static boolean checkNetNameExistence(String name, Class c) throws FileNotFoundException{
 		for (String string : getNames(c)) {
-			if (name == string)
+			if (name.toUpperCase().equals(string.toUpperCase()))
 				return true;
 		}
 		return false;
 	}
+	
+
 	
 }

@@ -3,7 +3,7 @@ package it.unibs.ingesw;
 import java.util.ArrayList;
 
 
-public class Network implements NameGiver, JsonAble{
+public class Network implements IDNameGiver{
 	
 	private ArrayList<Location> locations;
 	private ArrayList<Transition> transitions;
@@ -11,6 +11,7 @@ public class Network implements NameGiver, JsonAble{
 	private int netId; 
 	private String name;
 	static int network_id = 0;
+	private final int OFFSET = 10000;
 	
 	public Network (String name) {
 		locations = new ArrayList<Location>();
@@ -21,7 +22,7 @@ public class Network implements NameGiver, JsonAble{
 	}
 
 	public void addLocation (String name) {
-		locations.add(new Location(netId, locations.size() /*da cambiare se voglio aggiungere la rimozione*/, name));
+		locations.add(new Location(netId, locations.size()+OFFSET /*da cambiare se voglio aggiungere la rimozione*/, name));
 	}
 
 
@@ -79,7 +80,7 @@ public class Network implements NameGiver, JsonAble{
 		this.netLinks = netLinks;
 	}
 
-	public int getNetId() {
+	public int getId() {
 		return netId;
 	}
 

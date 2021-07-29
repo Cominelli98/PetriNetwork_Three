@@ -60,7 +60,7 @@ public final class Menu_Visua {
 	public static StringBuffer getNetworksList(ArrayList<Network> ns ){
 		StringBuffer s = new StringBuffer("");
 		int i = 0;
-		for (NameGiver n : ns) {
+		for (IDNameGiver n : ns) {
 			s.append(i++ + ")" + n.getName() + "\n");
 		}
 		return s;
@@ -92,12 +92,7 @@ public final class Menu_Visua {
 				System.out.println(pn.get(i).getLinksList());
 				break;
 			case 4:
-				System.out.println("ELENCO LOCATIONS:");
-				System.out.println(pn.get(i).getLocationsList());
-				System.out.println("ELENCO TRANSITIONS:");
-				System.out.println(pn.get(i).getTransitionsList());
-				System.out.println("ELENCO LINKS:");
-				System.out.println(pn.get(i).getLinksList());
+				printPetriNet(pn.get(i));
 				break;
 			case 0:
 				break;
@@ -114,6 +109,15 @@ public final class Menu_Visua {
 		}
 		return f;
 	}
-	//DOMANI CI PENSO DEVO FARE TRE METODINI PER LA STAMPINA DI QUESTE TRE COSINE COSI LO RICHIAMO IN SIMULATORE ALEX CRISTODI FAI QUALCOSA A BAITA PER FAVORE
+	//DOMANI CI PENSO DEVO FARE TRE METODINI PER LA STAMPINA DI QUESTE TRE COSINE COSI LO RICHIAMO IN SIMULATORE MA SO MIA BU
+	
+	public static void printPetriNet(Petri_network pn) {
+		System.out.println("ELENCO LOCATIONS:");
+		System.out.println(pn.getLocationsList());
+		System.out.println("ELENCO TRANSITIONS:");
+		System.out.println(pn.getTransitionsList());
+		System.out.println("ELENCO LINKS:");
+		System.out.println(pn.getLinksList());
+		}
 	
 }

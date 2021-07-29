@@ -2,7 +2,7 @@ package it.unibs.ingesw;
 
 import java.util.ArrayList;
 
-public class Node implements NameGiver{
+public class Node implements IDNameGiver/*, ValueGiver*/{
 	
 	private int netId;
 	private int nodeId;
@@ -25,7 +25,7 @@ public class Node implements NameGiver{
 		this.netId = netId;
 	}
 
-	public int getNodeId() {
+	public int getId() {
 		return nodeId;
 	}
 
@@ -41,6 +41,15 @@ public class Node implements NameGiver{
 	public String getName() {
 		return nodeName;
 	}
+
+
+
+	/*@Override
+	public int getValue() {
+		return 0;
+	}*/
+	
+
 	
 	
 	

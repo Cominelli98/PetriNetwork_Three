@@ -77,7 +77,7 @@ public final class Utility {
 	
 	
 	
-	public static boolean nameCheck(NameGiver n, String s) {
+	public static boolean nameCheck(IDNameGiver n, String s) {
 		if (n.getName().toUpperCase().equals(s.toUpperCase()))
 			return true;
 		return false;

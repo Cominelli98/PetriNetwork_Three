@@ -39,9 +39,9 @@ public final class Menu_Reti {
 			try {
 				exists = checkNetExistence(name, ns);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			if (exists)
 				System.out.println(NOME_GIA_PRESENTE_RETE);
 		}while(exists);
@@ -175,12 +175,12 @@ public final class Menu_Reti {
 			if (checkLinkExistence(l, t, n))
 				System.out.println(LINK_GIA_PRESENTE);
 			else
-				n.addLink(new Link(l, t, n.getNetId()));
+				n.addLink(new Link(l, t, n.getId()));
 		else 
 			if (checkLinkExistence(t, l, n))
 				System.out.println(LINK_GIA_PRESENTE);
 			else {
-				n.addLink(new Link(t, l, n.getNetId()));
+				n.addLink(new Link(t, l, n.getId()));
 			}
 	}
 	

@@ -1,7 +1,7 @@
 package it.unibs.ingesw;
 
-public interface JsonAble {
-	public int getNetId();
-	
+public interface IDNameGiver {
 	public String getName();
+	
+	public int getId();
 }

@@ -2,7 +2,7 @@ package it.unibs.ingesw;
 
 import java.util.ArrayList;
 
-public class Petri_network implements NameGiver, JsonAble{
+public class Petri_network implements IDNameGiver{
 	private ArrayList<Petri_location> petriLocations;
 	private ArrayList<Petri_transition> petriTransitions;
 	private ArrayList<Petri_link> petriNetLinks;
@@ -16,7 +16,7 @@ public class Petri_network implements NameGiver, JsonAble{
 		petriLocations = Converter.toPetriLocations(n.getLocations(), petriNetId);
 		petriTransitions = Converter.toPetriTransitions(n.getTransitions(), petriNetId);
 		petriNetLinks = Converter.toPetriLinks(petriLocations, petriTransitions, n.getNetLinks(), petriNetId);
-		this.fatherNetId = n.getNetId();
+		this.fatherNetId = n.getId();
 		this.name = name;
 	}
 	
@@ -44,7 +44,7 @@ public class Petri_network implements NameGiver, JsonAble{
 	public StringBuffer getTransitionsList() {
 		StringBuffer s = new StringBuffer("");
 		for (int i = 0; i<petriTransitions.size(); i++) {
-			s.append(i + ")" + petriTransitions.get(i).getName() + " costo: " + petriTransitions.get(i).getCost() + "\n");
+			s.append(i + ")" + petriTransitions.get(i).getName() + " costo: " + petriTransitions.get(i).getValue() + "\n");
 		}
 		return s;
 	}
@@ -52,7 +52,7 @@ public class Petri_network implements NameGiver, JsonAble{
 	public StringBuffer getLocationsList() {
 		StringBuffer s = new StringBuffer("");
 		for (int i = 0; i<petriLocations.size(); i++) {
-			s.append(i + ")" + petriLocations.get(i).getName() + " marcatura iniziale: " + petriLocations.get(i).getToken() + "\n");
+			s.append(i + ")" + petriLocations.get(i).getName() + " marcatura: " + petriLocations.get(i).getValue() + "\n");
 		}
 		return s;
 	}
@@ -67,5 +67,10 @@ public class Petri_network implements NameGiver, JsonAble{
 	
 	public ArrayList<Petri_link> getLinks(){
 		return this.petriNetLinks;
+	}
+
+	@Override
+	public int getId() {
+		return petriNetId;
 	}
 }

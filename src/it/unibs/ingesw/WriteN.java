@@ -46,7 +46,7 @@ public final class WriteN {
 		}
 	}*/
 	
-	public static void save(JsonAble net) {
+	public static void save(IDNameGiver net) {
 		Gson gson = new Gson();
 		String data;
 		if (net.getClass() == Network.class) 

@@ -1,10 +1,10 @@
 package it.unibs.ingesw;
 
-public class Petri_transition extends Transition{
+public class Petri_transition extends Transition implements ValueGiver{
 	private int cost;
 	
 	public Petri_transition(Transition t, int petriNetId) {
-		super(petriNetId, t.getNodeId(), t.getName());
+		super(petriNetId, t.getId(), t.getName());
 		this.cost = 1;
 	}
 	
@@ -17,7 +17,7 @@ public class Petri_transition extends Transition{
 		this.cost = cost;
 	}
 	
-	public int getCost() {
+	public int getValue() {
 		return this.cost;
 	}
 }

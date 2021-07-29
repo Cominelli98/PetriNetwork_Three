@@ -64,8 +64,8 @@ public final class Menu_Salva {
 	/**
 	 * Metodo che richiama dalla classe statica WriteN il salvataggio su file delle reti create
 	 */
-	private static void saveNetOnFile(JsonAble n){
-		if (!ReadN.checkIdExistence(n.getNetId(), n.getClass()))
+	private static void saveNetOnFile(IDNameGiver n){
+		if (!ReadN.checkIdExistence(n.getId(), n.getClass()))
 			WriteN.save(n);
 		System.out.println(SALVATAGGIO + " rete " + n.getName());
 	}
