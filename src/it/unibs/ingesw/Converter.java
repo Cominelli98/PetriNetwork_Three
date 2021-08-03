@@ -33,28 +33,23 @@ public final class Converter {
 	
 	
 	public static Petri_link toPetri (ArrayList<Petri_location> pl, ArrayList<Petri_transition> pt, Link l, int petriNetId) {
-		Node tempOrigin = null;
-		Node tempDestination = null;
-		for (Location location : pl) {
-			if(location.getId() == l.getOrigin().getId())
-				tempOrigin = location;
+		for(Petri_location toCheckL : pl) {
+			if(toCheckL.getId() == l.getOrigin().getId()) {
+				for(Petri_transition toCheckT : pt) {
+					if(toCheckT.getId() == l.getDestination().getId())
+						return new Petri_link(toCheckL, toCheckT, petriNetId);
+				}
+			}
 		}
-		
-		for(Transition transition : pt) {
-			if(transition.getId() == l.getOrigin().getId())
-				tempOrigin = transition;
+		for(Petri_transition toCheckT : pt) {
+			if(toCheckT.getId() == l.getOrigin().getId()) {
+				for(Petri_location toCheckL : pl) {
+					if(toCheckL.getId() == l.getDestination().getId())
+						return new Petri_link(toCheckT, toCheckL, petriNetId);
+				}
+			}
 		}
-		
-		for (Location location : pl) {
-			if(location.getId() == l.getDestination().getId())
-				tempDestination = location;
-		}
-		
-		for(Transition transition : pt) {
-			if(transition.getId() == l.getDestination().getId())
-				tempDestination = transition;
-		}
-		return new Petri_link(tempOrigin, tempDestination, petriNetId);
+		return null;
 	}
 	
 	
