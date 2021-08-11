@@ -2,7 +2,7 @@ package it.unibs.ingesw;
 
 import java.util.ArrayList;
 
-public class Node implements IDNameGiver/*, ValueGiver*/{
+public class Node implements GenericNode{
 	
 	private int netId;
 	private int nodeId;
@@ -40,6 +40,30 @@ public class Node implements IDNameGiver/*, ValueGiver*/{
 	@Override
 	public String getName() {
 		return nodeName;
+	}
+
+
+
+	@Override
+	public int getValue() {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
+
+
+	@Override
+	public void addToken(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void reduceToken(int i) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -1,6 +1,6 @@
 package it.unibs.ingesw;
 
-public class Petri_transition extends Transition implements ValueGiver{
+public class Petri_transition extends Transition implements GenericNode{
 	private int cost;
 	
 	public Petri_transition(Transition t, int petriNetId) {

@@ -30,7 +30,7 @@ public final class Menu_Petri {
 			for (String s : MENUPETRI)
 				System.out.println(s);
 			
-			select = Utility.readLimitedInt(0, MENUPETRI.length-4);
+			select = Utility.readLimitedInt(0, MENUPETRI.length-3);
 			switch(select) {
 			
 			case 0:
@@ -75,6 +75,20 @@ public final class Menu_Petri {
 					System.out.println("Vuoi proseguire con la simulazione? \n 0)Esci \n 1)Prosegui");
 					selezione = Utility.readLimitedInt(0, 1);
 				}while(selezione!=0);
+				break;
+			case 5:
+				ArrayList<String> s2 = new ArrayList<String>();
+				int j;
+				try {
+					s2 = ReadN.readFile(Petri_network.class);
+					} catch (FileNotFoundException f) {
+						f.printStackTrace();
+					}
+				Petri_network prete;
+				System.out.println(ReadN.getNetNamesList(Petri_network.class));
+				j = Utility.readLimitedInt(0, 10000);
+				prete = (Petri_network) ReadN.jsonToObject(s2.get(j), Petri_network.class);
+				pn.add(prete);
 				break;
 			}
 		}while (select!=0);

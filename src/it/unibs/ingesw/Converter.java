@@ -34,21 +34,21 @@ public final class Converter {
 	
 	public static Petri_link toPetri (ArrayList<Petri_location> pl, ArrayList<Petri_transition> pt, Link l, int petriNetId) {
 		for(Petri_location toCheckL : pl) {
-			if(toCheckL.getId() == l.getOrigin().getId()) {
+			if(toCheckL.getId() == l.getLocation().getId()) {
 				for(Petri_transition toCheckT : pt) {
-					if(toCheckT.getId() == l.getDestination().getId())
-						return new Petri_link(toCheckL, toCheckT, petriNetId);
+					if(toCheckT.getId() == l.getTransition().getId())
+						return new Petri_link(toCheckL, toCheckT, petriNetId, l.getOrientation());
 				}
 			}
 		}
-		for(Petri_transition toCheckT : pt) {
+		/*for(Petri_transition toCheckT : pt) {
 			if(toCheckT.getId() == l.getOrigin().getId()) {
 				for(Petri_location toCheckL : pl) {
 					if(toCheckL.getId() == l.getDestination().getId())
 						return new Petri_link(toCheckT, toCheckL, petriNetId);
 				}
 			}
-		}
+		}*/
 		return null;
 	}
 	

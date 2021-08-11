@@ -172,16 +172,17 @@ public final class Menu_Reti {
 				t.getName() + "---->" + l.getName());
 		scelta = Utility.readLimitedInt(0, 1);
 		if (scelta == 0)
-			if (checkLinkExistence(l, t, n))
+			if (checkLinkExistence(l, t, n, 1))
 				System.out.println(LINK_GIA_PRESENTE);
 			else
-				n.addLink(new Link(l, t, n.getId()));
+				n.addLink(new Link(l, t, n.getId(), 1));
 		else 
-			if (checkLinkExistence(t, l, n))
+			if (checkLinkExistence(l, t, n, -1))
 				System.out.println(LINK_GIA_PRESENTE);
 			else {
-				n.addLink(new Link(t, l, n.getId()));
+				n.addLink(new Link(l, t, n.getId(),-1));
 			}
+		//TODO metti qualche controllo sull'inserimento corretto dell'orientamento
 	}
 	
 	/**
@@ -190,11 +191,12 @@ public final class Menu_Reti {
 	 * @param l location
 	 * @return boolean
 	 */
-	private static boolean checkLinkExistence(Node origin, Node destination, Network n) {
+	private static boolean checkLinkExistence(Location l, Transition t, Network n, int orientation) {
 		
 		for (int i = 0; i < n.getNetLinks().size(); i++) {
-			if(n.getNetLinks().get(i).getOrigin().equals(origin) &&
-					n.getNetLinks().get(i).getDestination().equals(destination))
+			if(n.getNetLinks().get(i).getLocation().equals(l) &&
+					n.getNetLinks().get(i).getTransition().equals(t) &&
+						n.getNetLinks().get(i).getOrientation() == orientation)
 				return true;
 		}
 		return false;

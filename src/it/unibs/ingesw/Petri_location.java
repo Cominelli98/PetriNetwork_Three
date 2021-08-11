@@ -1,6 +1,6 @@
 package it.unibs.ingesw;
 
-public class Petri_location extends Location implements ValueGiver{
+public class Petri_location extends Location implements GenericNode{
 	
 	private int token;
 

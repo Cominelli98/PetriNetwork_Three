@@ -29,7 +29,6 @@ public class Simulatore {
 			modificaToken(transAttivabili().get(scelta));
 			Menu_Visua.printPetriNet(rete);
 		}
-		//restituzione nuova marcatura
 	}
 	
 	
@@ -54,8 +53,9 @@ public class Simulatore {
 	private boolean attivabile(Petri_transition pt) {
 		for (Petri_link l : rete.getLinks()) {
 			if (l.getDestination().getId() == pt.getId()) {
-				System.out.println("ciao");
-				if(((Petri_location) l.getOrigin()).getValue() < pt.getValue())
+				int token = l.getOrigin().getValue();
+				int cost = pt.getValue();
+				if( l.getOrigin().getValue() < pt.getValue())
 					return false;
 			
 			}
@@ -66,16 +66,16 @@ public class Simulatore {
 	
 	private void riduciToken(Petri_transition pt) {
 		for (Petri_link l : rete.getLinks()) {
-			if (l.getDestination().getId() == pt.getId()) {
-				((Petri_location) l.getOrigin()).reduceToken(pt.getValue());
+			if (l.getTransition().getId() == pt.getId() && l.getOrientation() == 1) {
+				(l.getLocation()).reduceToken(pt.getValue());
 			}
 		}
 	}
 		
 	private void aggiungiToken(Petri_transition pt) {
 		for (Petri_link l : rete.getLinks()) {
-			if (l.getOrigin().getId() == pt.getId()) {
-				((Petri_location) l.getDestination()).addToken(1); //TO UNDERSTAND: QUANTO AUMENTANO I TOKEN DELLA DESTINAZIONE 2AAAAAAAAAAAAAAAAAAAAAAAAAAA
+			if (l.getTransition().getId() == pt.getId() && l.getOrientation() == -1) {
+				(l.getLocation()).addToken(1); //TO UNDERSTAND: QUANTO AUMENTANO I TOKEN DELLA DESTINAZIONE 2AAAAAAAAAAAAAAAAAAAAAAAAAAA
 			}
 		}
 	}
