@@ -49,12 +49,13 @@ public class Simulatore {
 		}
 		return risultato;
 	}
-	//TODO: Va reso falso anche il caso in cui nessun link ha come destinazione la transizione
 	private boolean attivabile(Petri_transition pt) {
+		boolean exist = checkIfOneLinkExistWithTrans(pt);
+		//prima di tutto controlliamo se almeno un link ha come destinazione la transizione
+		if(!exist)
+			return false;
 		for (Petri_link l : rete.getLinks()) {
 			if (l.getDestination().getId() == pt.getId()) {
-				int token = l.getOrigin().getValue();
-				int cost = pt.getValue();
 				if( l.getOrigin().getValue() < pt.getValue())
 					return false;
 			
@@ -63,27 +64,19 @@ public class Simulatore {
 		}
 		return true;
 	}
-	/*
-	private void riduciToken(Petri_transition pt) {
-		Petri_location toReduce;
-		for (Petri_link l : rete.getLinks()) {
-			if (l.getTransition().getId() == pt.getId() && l.getOrientation() == 1) {
-				toReduce = l.getLocation();
-				toReduce.reduceToken(pt.getValue());
-			}
+	/**
+	 * 
+	 * @param pt la transizione da andare a controllare
+	 * @return un booleano che dice se almeno un link ha come destinazione la transizione
+	 */
+	private boolean checkIfOneLinkExistWithTrans(Petri_transition pt) {
+		for(Petri_link l : rete.getLinks()) {
+			if(l.getDestination().getId() == pt.getId())
+				return true;
 		}
+		return false;
 	}
-		
-	private void aggiungiToken(Petri_transition pt) {
-		Petri_location toAdd;
-		for (Petri_link l : rete.getLinks()) {
-			if (l.getTransition().getId() == pt.getId() && l.getOrientation() == -1) {
-				toAdd = l.getLocation();//TO UNDERSTAND: QUANTO AUMENTANO I TOKEN DELLA DESTINAZIONE 2AAAAAAAAAAAAAAAAAAAAAAAAAAA
-				toAdd.addToken(1);
-			}
-		}
-	}
-	*/
+
 	private void modificaToken(Petri_transition pt) {
 		rete.reduceToken(pt.getId(), pt.getValue());;
 		rete.addToken(pt.getId(), 1); //viene passato 1 perchè per ora è il valore di default
