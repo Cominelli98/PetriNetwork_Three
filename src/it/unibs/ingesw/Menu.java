@@ -1,5 +1,6 @@
 package it.unibs.ingesw;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
@@ -38,6 +39,7 @@ public class Menu {
 	 *metodo principale di avvio del menù, switch che richiama tutte le funzionalità, 0 per uscire
 	 */
 	public void startMenu() {
+		loadSavedNets();
 		int select = -1;
 		do {
 			for (String s : MENUSTART) {
@@ -65,6 +67,23 @@ public class Menu {
 			}
 		}while(select != 0);
 		
+	}
+	
+	public void loadSavedNets() {
+		ArrayList<String> n = new ArrayList<String>();
+		ArrayList<String> pn = new ArrayList<String>();
+			try {
+				n = ReadN.readFile(Network.class);
+				pn = ReadN.readFile(Petri_network.class);
+
+			} catch (FileNotFoundException | IllegalArgumentException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			for(String s : n) 
+				networks.add((Network) ReadN.jsonToObject(s, Network.class));
+			for(String s : pn)
+				petriNetworks.add((Petri_network) ReadN.jsonToObject(s, Petri_network.class));
 	}
 }
 	

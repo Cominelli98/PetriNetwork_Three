@@ -120,4 +120,7 @@ public final class Menu_Visua {
 		System.out.println(pn.getLinksList());
 		}
 	
+	public void savedNetViewer(ArrayList<Network> savedNet) {
+		
+	}
 }
