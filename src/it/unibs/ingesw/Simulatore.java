@@ -63,26 +63,30 @@ public class Simulatore {
 		}
 		return true;
 	}
-	
+	/*
 	private void riduciToken(Petri_transition pt) {
+		Petri_location toReduce;
 		for (Petri_link l : rete.getLinks()) {
 			if (l.getTransition().getId() == pt.getId() && l.getOrientation() == 1) {
-				(l.getLocation()).reduceToken(pt.getValue());
+				toReduce = l.getLocation();
+				toReduce.reduceToken(pt.getValue());
 			}
 		}
 	}
 		
 	private void aggiungiToken(Petri_transition pt) {
+		Petri_location toAdd;
 		for (Petri_link l : rete.getLinks()) {
 			if (l.getTransition().getId() == pt.getId() && l.getOrientation() == -1) {
-				(l.getLocation()).addToken(1); //TO UNDERSTAND: QUANTO AUMENTANO I TOKEN DELLA DESTINAZIONE 2AAAAAAAAAAAAAAAAAAAAAAAAAAA
+				toAdd = l.getLocation();//TO UNDERSTAND: QUANTO AUMENTANO I TOKEN DELLA DESTINAZIONE 2AAAAAAAAAAAAAAAAAAAAAAAAAAA
+				toAdd.addToken(1);
 			}
 		}
 	}
-	
+	*/
 	private void modificaToken(Petri_transition pt) {
-		riduciToken(pt);
-		aggiungiToken(pt);
+		rete.reduceToken(pt.getId(), pt.getValue());;
+		rete.addToken(pt.getId(), 1); //viene passato 1 perchè per ora è il valore di default
 	}
 	
 }

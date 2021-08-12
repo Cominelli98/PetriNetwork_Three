@@ -37,4 +37,12 @@ public class Petri_link{
 			return (T) p_transition;
 		return (T) p_location;
 	}
+	
+	public void reduceToken(int reduction) {
+		p_location.reduceToken(reduction);
+	}
+	
+	public void addToken(int toAdd) {
+		p_location.addToken(toAdd);
+	}
 }

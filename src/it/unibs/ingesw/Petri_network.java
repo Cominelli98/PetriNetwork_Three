@@ -73,4 +73,30 @@ public class Petri_network implements IDNameGiver{
 	public int getId() {
 		return petriNetId;
 	}
+	
+	public void reduceToken(int idTransition, int quantity) {
+		for(Petri_link l : petriNetLinks) {
+			if(l.getTransition().getId() == idTransition && l.getOrientation() == 1) {
+				l.reduceToken(quantity);
+				int id = l.getLocation().getId();
+				for(Petri_location pl : petriLocations) {
+					if(pl.getId() == id)
+						pl.reduceToken(quantity);
+				}
+			}
+		}
+	}
+	
+	public void addToken(int idTransition, int quantity) {
+		for(Petri_link l : petriNetLinks) {
+			if(l.getTransition().getId() == idTransition && l.getOrientation() == -1) {
+				l.reduceToken(quantity);
+				int id = l.getLocation().getId();
+				for(Petri_location pl : petriLocations) {
+					if(pl.getId() == id)
+						pl.addToken(quantity);
+				}
+			}
+		}
+	}
 }
