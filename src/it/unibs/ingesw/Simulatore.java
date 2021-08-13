@@ -49,7 +49,8 @@ public class Simulatore {
 		}
 		return risultato;
 	}
-	private boolean attivabile(Petri_transition pt) {
+	
+	private boolean attivabile (Petri_transition pt) {
 		boolean exist = checkIfOneLinkExistWithTrans(pt);
 		//prima di tutto controlliamo se almeno un link ha come destinazione la transizione
 		if(!exist)
