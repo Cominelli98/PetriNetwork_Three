@@ -90,7 +90,7 @@ public class Petri_network implements IDNameGiver{
 	public void addToken(int idTransition, int quantity) {
 		for(Petri_link l : petriNetLinks) {
 			if(l.getTransition().getId() == idTransition && l.getOrientation() == -1) {
-				l.reduceToken(quantity);
+				l.addToken(quantity);
 				int id = l.getLocation().getId();
 				for(Petri_location pl : petriLocations) {
 					if(pl.getId() == id)
