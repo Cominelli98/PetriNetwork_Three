@@ -21,81 +21,8 @@ public final class Menu_Petri {
 			"Esiste già una rete di petri con questo nome",
 			"Questa rete di petri esiste già",
 	};
-	private static final String NO_RETI_V = "Non ci sono reti di petri da visualizzare";
-	private static final String NO_RETI_S = "Non ci sono reti di petri da salvare";
 	
-	public static void petriMenu(ArrayList<Petri_network> pn, ArrayList<Network> ns) {
-		int select = -1;
-		do {
-			for (String s : MENUPETRI)
-				System.out.println(s);
-			
-			select = Utility.readLimitedInt(0, MENUPETRI.length-3);
-			switch(select) {
-			
-			case 0:
-				break;
-			case 1:
-				createPetri(pn, ns);
-				break;
-			case 2: 
-				if(pn.size() != 0)
-					Menu_Visua.petriNetViewer(pn);
-				else {
-					System.out.println(NO_RETI_V);
-				}
-				break;
-			case 3:
-				if(pn.size() != 0)
-					Menu_Salva.pSaveOption(pn);
-				else 
-					System.out.println(NO_RETI_S);
-				break;
-			case 4:
-				ArrayList<String> s = new ArrayList<String>();
-				Simulatore daSimulare;
-				Petri_network rete;
-				int scelta;
-				int selezione;
-				try {
-				s = ReadN.readFile(Petri_network.class);
-				} catch (FileNotFoundException f) {
-					f.printStackTrace();
-				}
-				System.out.println("Scegli di quale rete di Petri vuoi simulare l'evoluzione");
-				System.out.println(ReadN.getNetNamesList(Petri_network.class));
-				scelta = Utility.readLimitedInt(0, s.size()-1);
-				rete = (Petri_network) ReadN.jsonToObject(s.get(scelta), Petri_network.class);
-				daSimulare = new Simulatore(rete);
-				System.out.println("STATO DI PARTENZA:");
-				Menu_Visua.printPetriNet(rete);
-				do {
-					System.out.println("MARCATURA SUCCESSIVA:");
-					daSimulare.nextStep();
-					System.out.println("Vuoi proseguire con la simulazione? \n 0)Esci \n 1)Prosegui");
-					selezione = Utility.readLimitedInt(0, 1);
-				}while(selezione!=0);
-				break;
-			case 5:
-				ArrayList<String> s2 = new ArrayList<String>();
-				int j;
-				try {
-					s2 = ReadN.readFile(Petri_network.class);
-					} catch (FileNotFoundException f) {
-						f.printStackTrace();
-					}
-				Petri_network prete;
-				System.out.println(ReadN.getNetNamesList(Petri_network.class));
-				j = Utility.readLimitedInt(0, 10000);
-				prete = (Petri_network) ReadN.jsonToObject(s2.get(j), Petri_network.class);
-				pn.add(prete);
-				break;
-			}
-		}while (select!=0);
-		
-	}
-	
-	private static void createPetri(ArrayList<Petri_network> pn, ArrayList<Network> ns) {
+	public static void createPetri(ArrayList<Petri_network> pn, ArrayList<Network> ns) {
 		
 		System.out.println(Menu_Visua.getNetworksList(ns));
 		int select = -1;
@@ -176,6 +103,32 @@ public final class Menu_Petri {
 			System.out.println("Inserisci la marcatura iniziale della posizione "+pl.getName() + " (0 per default)");
 			pl.setToken(Utility.readLowLimitInt(0));
 		}
+	}
+	
+	public static void simulaPetri() {
+		ArrayList<String> s = new ArrayList<String>();
+		Simulatore daSimulare;
+		Petri_network rete;
+		int scelta;
+		int selezione;
+		try {
+		s = ReadN.readFile(Petri_network.class);
+		} catch (FileNotFoundException f) {
+			f.printStackTrace();
+		}
+		System.out.println("Scegli di quale rete di Petri vuoi simulare l'evoluzione");
+		System.out.println(ReadN.getNetNamesList(Petri_network.class));
+		scelta = Utility.readLimitedInt(0, s.size()-1);
+		rete = (Petri_network) ReadN.jsonToObject(s.get(scelta), Petri_network.class);
+		daSimulare = new Simulatore(rete);
+		System.out.println("STATO DI PARTENZA:");
+		Menu_Visua.printPetriNet(rete);
+		do {
+			System.out.println("MARCATURA SUCCESSIVA:");
+			daSimulare.nextStep();
+			System.out.println("Vuoi proseguire con la simulazione? \n 0)Esci \n 1)Prosegui");
+			selezione = Utility.readLimitedInt(0, 1);
+		}while(selezione!=0);
 	}
 	
 

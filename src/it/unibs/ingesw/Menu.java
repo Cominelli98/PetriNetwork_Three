@@ -4,23 +4,21 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
-public class Menu {
-	
-	private final String SELEZIONE = "Seleziona: ";
-	
+public final class Menu {
+		
 	private final String MENUSTART[] = {
 			"MENU:",
 			"___________________________",
-			"1:Crea una rete e gestiscila",
-			"2:Gestisci reti di Petri",
+			"1:entra in modalità configuratore",
+			"2:entra in modalità fruitore",
 			"0:Esci",
 			"___________________________",
 			
 	};
 	
-	private Network currentNetwork;
-	private ArrayList<Network> networks;
-	private ArrayList<Petri_network> petriNetworks;
+	private static Network currentNetwork;
+	private static ArrayList<Network> networks;
+	private static ArrayList<Petri_network> petriNetworks;
 	
 	/**
 	 * Costruisce un menù inizializzando l'array di reti e creando, se non esiste ancora, il file su cui verranno
@@ -32,7 +30,7 @@ public class Menu {
 		petriNetworks = new ArrayList<>();
 		WriteN.fileCreation();
 		Network.network_id = Utility.getMax(ReadN.getNetIDsFromFile(Network.class));
-		Petri_network.petriNetworkId = Utility.getMax(ReadN.getNetIDsFromFile(Petri_network.class));
+		Petri_network.petriNetworkId = Utility.getMax(ReadN.getNetIDsFromFile(Petri_network.class));//maxPetriId();
 	}
 	
 	/**
@@ -49,17 +47,10 @@ public class Menu {
 			select = Utility.readLimitedInt(0, MENUSTART.length-4);
 			switch (select) {
 				case 1:
-					Menu_Reti.createNetwork(currentNetwork, networks);
+					Menu_configuratore.configuratore();
 					break;
 				case 2:
-//					if(networks.size() != 0)
-//						saveOption();
-//					else
-//						System.out.println("Non ci sono reti da salvare");
-//					break;
-//				case 4:
-					//createPetri();
-					Menu_Petri.petriMenu(petriNetworks, networks);
+					Menu_fruitore.menuFriutore();
 					break;
 				case 0:
 					Utility.close();
@@ -72,6 +63,7 @@ public class Menu {
 	public void loadSavedNets() {
 		ArrayList<String> n = new ArrayList<String>();
 		ArrayList<String> pn = new ArrayList<String>();
+		ArrayList<String> pnp = new ArrayList<String>();
 			try {
 				n = ReadN.readFile(Network.class);
 				pn = ReadN.readFile(Petri_network.class);
@@ -84,6 +76,18 @@ public class Menu {
 				networks.add((Network) ReadN.jsonToObject(s, Network.class));
 			for(String s : pn)
 				petriNetworks.add((Petri_network) ReadN.jsonToObject(s, Petri_network.class));
+	}
+	
+	public static Network getCurrentNetwork() {
+		return currentNetwork;
+	}
+	
+	public static ArrayList<Network> getNetworks(){
+		return networks;
+	}
+
+	public static ArrayList<Petri_network> getPetriNetworks(){
+		return petriNetworks;
 	}
 }
 	
