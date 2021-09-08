@@ -22,8 +22,13 @@ public final class Menu_Petri {
 			"Questa rete di petri esiste già",
 	};
 	
+	private final static String NO_RETI="non ci sono reti salvate";
+	
 	public static void createPetri(ArrayList<Petri_network> pn, ArrayList<Network> ns) {
-		
+		if(ns.size() == 0) {
+			System.out.println(NO_RETI);
+			return;
+		}
 		System.out.println(Menu_Visua.getNetworksList(ns));
 		int select = -1;
 		System.out.println(MESSAGGI_MENU[0]);
