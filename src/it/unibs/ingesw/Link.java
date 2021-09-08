@@ -20,22 +20,12 @@ public class Link {
 		return (T) transition;
 	}
 
-
-	/*public void setOrigin(Node origin) {
-		this.origin = origin;
-	}*/
-
 	public <T extends GenericNode > T getDestination() {
 		if(this.orientation == 1)
 			return (T) transition;
 		return (T) location;
 	}
 
-	/*public void setDestination(Node destination) {
-		this.destination = destination;
-	}
-	*/
-	
 	public Location getLocation() {
 		return location;
 	}

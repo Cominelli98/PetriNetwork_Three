@@ -77,7 +77,6 @@ public final class ReadN {
 				i++;
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return names;

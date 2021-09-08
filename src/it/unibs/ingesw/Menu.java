@@ -69,7 +69,6 @@ public final class Menu {
 				pn = ReadN.readFile(Petri_network.class);
 
 			} catch (FileNotFoundException | IllegalArgumentException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			for(String s : n) 

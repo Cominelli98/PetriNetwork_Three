@@ -41,14 +41,6 @@ public final class Converter {
 				}
 			}
 		}
-		/*for(Petri_transition toCheckT : pt) {
-			if(toCheckT.getId() == l.getOrigin().getId()) {
-				for(Petri_location toCheckL : pl) {
-					if(toCheckL.getId() == l.getDestination().getId())
-						return new Petri_link(toCheckT, toCheckL, petriNetId);
-				}
-			}
-		}*/
 		return null;
 	}
 	

@@ -119,7 +119,6 @@ public final class Menu_Visua {
 		}
 		return f;
 	}
-	//DOMANI CI PENSO DEVO FARE TRE METODINI PER LA STAMPINA DI QUESTE TRE COSINE COSI LO RICHIAMO IN SIMULATORE MA SO MIA BU
 	
 	public static void printPetriNet(Petri_network pn) {
 		System.out.println("ELENCO LOCATIONS:");

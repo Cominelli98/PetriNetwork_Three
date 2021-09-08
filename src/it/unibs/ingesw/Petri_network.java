@@ -75,7 +75,6 @@ public class Petri_network implements IDNameGiver{
 	}
 	
 	public void reduceToken(int idTransition, int quantity) {
-		int idLoc;
 		for(Petri_link l : petriNetLinks) {
 			if(l.getTransition().getId() == idTransition && l.getOrientation() == 1) {
 				l.reduceToken(quantity);

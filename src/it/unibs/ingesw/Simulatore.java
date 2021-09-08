@@ -81,7 +81,7 @@ public class Simulatore {
 
 	private void modificaToken(Petri_transition pt) {
 		rete.reduceToken(pt.getId(), pt.getValue());;
-		rete.addToken(pt.getId(), 1);	//viene passato 1 perchè per ora è il valore di default
+		rete.addToken(pt.getId(), 1);
 	}
 	
 	private int getIndexOfLocation(Petri_location toFind) {

@@ -1,7 +1,6 @@
 package it.unibs.ingesw;
 
 public class Petri_link{
-	//separato per possibile priorità da aggiungere
 	private Petri_location p_location;
 	private Petri_transition p_transition;
 	private int petriNetId;
